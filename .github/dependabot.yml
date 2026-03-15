@@ -1,0 +1,16 @@
+version: 2
+updates:
+  - package-ecosystem: cargo
+    directory: /habaki/src-tauri
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: npm
+    directory: /habaki
+    schedule:
+      interval: weekly
+
+  - package-ecosystem: github-actions
+    directory: /
+    schedule:
+      interval: weekly

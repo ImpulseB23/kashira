@@ -1,29 +1,11 @@
-name: CI
+name: Release
 
 on:
   push:
-    branches: [main]
-  pull_request:
-    branches: [main]
+    tags: ["v*"]
 
 jobs:
-  cpp-tests:
-    runs-on: ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
-    steps:
-      - uses: actions/checkout@v4
-
-      - name: build and run tests
-        run: |
-          cd tests
-          cmake -B build
-          cmake --build build
-          ctest --test-dir build --output-on-failure
-
   build:
-    needs: cpp-tests
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -41,14 +23,6 @@ jobs:
             ~/.cargo/git
             habaki/src-tauri/target
           key: ${{ runner.os }}-cargo-${{ hashFiles('habaki/src-tauri/Cargo.lock') }}
-          restore-keys: ${{ runner.os }}-cargo-
-
-      - name: cache bun
-        uses: actions/cache@v4
-        with:
-          path: habaki/node_modules
-          key: ${{ runner.os }}-bun-${{ hashFiles('habaki/bun.lock') }}
-          restore-keys: ${{ runner.os }}-bun-
 
       - name: install tauri deps (linux)
         if: runner.os == 'Linux'
@@ -73,3 +47,24 @@ jobs:
             habaki/src-tauri/target/release/bundle/**/*.dmg
             habaki/src-tauri/target/release/bundle/**/*.AppImage
             habaki/src-tauri/target/release/bundle/**/*.deb
+
+  release:
+    needs: build
+    runs-on: ubuntu-latest
+    environment: production
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/download-artifact@v4
+        with:
+          merge-multiple: true
+
+      - name: create release
+        uses: softprops/action-gh-release@v2
+        with:
+          files: |
+            **/*.msi
+            **/*.dmg
+            **/*.AppImage
+            **/*.deb
+          generate_release_notes: true
