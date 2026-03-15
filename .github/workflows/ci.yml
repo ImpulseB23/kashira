@@ -16,14 +16,17 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-15]
     steps:
       - uses: actions/checkout@v6
+
+      - name: install ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: build and run tests
         run: |
           cd tests
-          cmake -B build
+          cmake -B build -G Ninja
           cmake --build build
           ctest --test-dir build --output-on-failure
 
@@ -33,7 +36,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-14]
+        os: [ubuntu-latest, windows-latest, macos-15]
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
