@@ -65,7 +65,7 @@ jobs:
           TAURI_SIGNING_PRIVATE_KEY: ""
 
       - name: upload artifacts
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: kashira-${{ runner.os }}
           path: |
