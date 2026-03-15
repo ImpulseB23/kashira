@@ -1,64 +1,50 @@
-# timeshift scoring
+# Timeshift Scoring
 
-## how it works
+## How it works
 
-the score is a number from 0-100 that tells you how likely someone is to be awake right now. it's not a guess — it layers real data on top of each other to get a pretty accurate read.
+The score is a number from 0-100 representing how likely someone is to respond right now. It combines multiple factors into one final number.
 
-## layers
+## Factors
 
-from most to least important:
+**Wakefulness** - are they likely awake? Based on their country's average sleep patterns, adjusted for age and weekend. Uses a continuous curve across 24 hours with no hard sleep/awake boundary. Configurable via `ito/sleep_curve.json`.
 
-**user override** — if someone manually sets active hours for a person (night shift worker, weird schedule, etc), that wins over everything. -1 means no override.
+**Age** - two effects. Shifts the sleep window (younger people sleep later, older earlier) via `ito/age_brackets.json`. Also caps the max score for older age groups via `ito/age_caps.json`.
 
-**learned patterns** — not implemented yet, but the plan is to eventually learn from when people actually respond and adjust automatically. the interface is ready for it.
+**Weekend** - bedtime and waketime shift later on weekends. Friday nights also shift bedtime. Configurable via `ito/weekend.json`.
 
-**age** — younger people stay up later, older people wake up earlier. data in `data/age_brackets.json`. offsets are in minutes, 35-44 age group is the baseline (0 offset).
+**Work hours** - if set, reduces the score during work hours (busy, less likely to respond to personal messages).
 
-**country** — different cultures have wildly different sleep habits. spain doesn't go to bed until midnight, south africa is out by 10:30pm. data in `data/countries.json`.
+**User override** - manual active hours per person. Trumps automatic calculations.
 
-**timezone** — the obvious one. all scoring happens in the person's local time.
-
-## the curve
-
-it's not just "asleep or awake". the score ramps up and down throughout the day:
-
-- deep sleep (middle of the night): 5-10
-- falling asleep (around bedtime): 30 dropping to 10
-- waking up: 10 ramping to 60
-- morning: 60 ramping to 90
-- peak hours (mid-morning to evening): 85-95
-- afternoon dip (~2-3pm): drops to ~75
-- winding down (few hours before bed): 85 dropping to 30
-
-## architecture
+## Data flow
 
 ```
-src-tauri/blades/timeshift/
-  timeshift.h/.cpp   — FFI api + combines everything
-  curves.h/.cpp      — the actual curve math
-  overrides.h/.cpp   — user override handling
+JSON configs ──→ Rust (loads data, resolves timezone/age) ──→ C++ (all math) ──→ score
 ```
 
-rust loads the json data, resolves timezones, and passes plain ints to c++. c++ just does math — no IO, no allocations.
+Rust handles I/O and data lookup. C++ handles all scoring logic. C provides shared time utilities.
 
-## FFI
+## File structure
 
-times are minutes past midnight (23:30 = 1410).
+```
+habaki/src-tauri/
+├── common/
+│   └── timeutil.c/h          shared C utilities
+├── blades/timeshift/
+│   ├── wakefulness.cpp/h      sleep cycle scoring
+│   ├── availability.cpp/h     work hours modifier
+│   ├── overrides.cpp/h        user manual overrides
+│   └── tsuka.cpp/h            orchestrator (combines everything)
+└── src/main.rs               FFI bridge + data loading
 
-```cpp
-extern "C" {
-    int get_activity_score(
-        int current_hour,
-        int current_minute,
-        int bedtime_minutes,
-        int waketime_minutes,
-        int age,
-        int override_active_start,
-        int override_active_end
-    );
-}
+ito/
+├── countries.json             country sleep data
+├── age_brackets.json          age-based sleep offsets
+├── age_caps.json              age-based score caps
+├── sleep_curve.json           curve shape parameters
+└── weekend.json               weekend shift values
 ```
 
-## data flow
+## Configuration
 
-json files → rust (parses, resolves timezone, applies age offset) → c++ (pure math) → score back to frontend
+All scoring parameters live in JSON files under `ito/`. Change them without recompiling - Rust loads them at startup.

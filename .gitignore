@@ -14,13 +14,18 @@ build/
 *.pdb
 
 .vscode/
+.idea/
+*.iml
 *.swp
+*~
+
 .DS_Store
 Thumbs.db
 desktop.ini
 
 .env
 .env.*
+*.log
 
-# tauri generated schemas get regenerated on build
-src-tauri/gen/
+# tauri
+habaki/src-tauri/gen/

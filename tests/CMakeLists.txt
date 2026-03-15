@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.20)
-project(hilt-tests)
+project(kashira-tests)
 
 set(CMAKE_CXX_STANDARD 17)
 
@@ -14,9 +14,10 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests
     test_curves.cpp
-    ../src-tauri/blades/timeshift/wakefulness.cpp
-    ../src-tauri/blades/timeshift/availability.cpp
+    ../habaki/src-tauri/blades/timeshift/wakefulness.cpp
+    ../habaki/src-tauri/blades/timeshift/availability.cpp
+    ../habaki/src-tauri/common/timeutil.c
 )
 
-target_include_directories(tests PRIVATE ../src-tauri/blades/timeshift)
+target_include_directories(tests PRIVATE ../habaki/src-tauri/blades/timeshift ../habaki/src-tauri/common)
 target_link_libraries(tests Catch2::Catch2WithMain)

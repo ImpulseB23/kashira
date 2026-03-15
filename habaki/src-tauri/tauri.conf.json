@@ -1,0 +1,22 @@
+{
+  "productName": "Kashira",
+  "version": "0.1.0",
+  "identifier": "com.frostcrypt.kashira",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Kashira",
+        "width": 400,
+        "height": 600,
+        "resizable": true,
+        "decorations": false
+      }
+    ]
+  }
+}

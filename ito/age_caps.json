@@ -1,0 +1,6 @@
+[
+  { "min_age": 0, "max_age": 24, "cap": 90 },
+  { "min_age": 25, "max_age": 44, "cap": 88 },
+  { "min_age": 45, "max_age": 59, "cap": 82 },
+  { "min_age": 60, "max_age": 100, "cap": 75 }
+]

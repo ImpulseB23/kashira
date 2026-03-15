@@ -14,8 +14,6 @@ jobs:
         os: [ubuntu-latest, windows-latest, macos-latest]
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
 
       - name: build and run tests
         run: |
@@ -28,8 +26,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-        with:
-          submodules: true
       - uses: dtolnay/rust-toolchain@stable
 
       - name: install tauri deps
@@ -38,7 +34,7 @@ jobs:
           sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
 
       - name: build
-        run: cd src-tauri && cargo build
+        run: cd habaki/src-tauri && cargo build
 
   frontend:
     runs-on: ubuntu-latest
@@ -47,5 +43,5 @@ jobs:
 
       - uses: oven-sh/setup-bun@v2
 
-      - run: bun install
-      - run: bun run build
+      - run: cd habaki && bun install
+      - run: cd habaki && bun run build

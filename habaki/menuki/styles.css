@@ -1,0 +1,44 @@
+:root {
+  --sakura: #FF4D7A;
+  --sakura-light: #FF7A9E;
+  --sakura-deep: #CC2255;
+
+  --bg: #0C0C10;
+  --surface: #16161E;
+  --surface-hover: #1E1E28;
+  --border: #2A2A35;
+
+  --text: #E6E4EB;
+  --text-muted: #8A8895;
+  --text-dim: #555560;
+}
+
+[data-theme="light"] {
+  --bg: #FAF8F5;
+  --surface: #FFFFFF;
+  --surface-hover: #F2F0ED;
+  --border: #E0DDD8;
+
+  --text: #1A1820;
+  --text-muted: #6B6875;
+  --text-dim: #A09DAA;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: system-ui, -apple-system, sans-serif;
+  font-size: 14px;
+  line-height: 1.5;
+}
+
+::selection {
+  background: var(--sakura);
+  color: var(--bg);
+}
