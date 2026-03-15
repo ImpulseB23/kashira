@@ -23,3 +23,7 @@ add_executable(tests
 
 target_include_directories(tests PRIVATE ../habaki/src-tauri/blades/timeshift ../habaki/src-tauri/common)
 target_link_libraries(tests Catch2::Catch2WithMain)
+
+if(APPLE)
+    target_compile_options(tests PRIVATE -include Availability.h)
+endif()
