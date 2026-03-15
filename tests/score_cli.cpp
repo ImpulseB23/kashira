@@ -1,7 +1,7 @@
 #include <cstdio>
 #include <cstring>
 #include <ctime>
-#include "../src-tauri/blades/timeshift/curves.h"
+#include "../src-tauri/blades/timeshift/wakefulness.h"
 
 struct Country {
     const char* code;

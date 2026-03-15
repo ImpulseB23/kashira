@@ -14,8 +14,8 @@ FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests
     test_curves.cpp
-    ../src-tauri/blades/timeshift/curves.cpp
-    ../src-tauri/blades/timeshift/adjustments.cpp
+    ../src-tauri/blades/timeshift/wakefulness.cpp
+    ../src-tauri/blades/timeshift/availability.cpp
 )
 
 target_include_directories(tests PRIVATE ../src-tauri/blades/timeshift)

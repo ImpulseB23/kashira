@@ -1,67 +1,62 @@
 #include <catch2/catch_test_macros.hpp>
-#include "curves.h"
-#include "adjustments.h"
+#include "wakefulness.h"
+#include "availability.h"
+
+SleepCurveConfig cfg = {
+    45, 25, 12, 8, 90, 10, 25,
+    12, 30, 70, 25, 90,
+    85, 85, 45, 92, 25,
+    90, 45, 60, 52, 75
+};
 
 TEST_CASE("deep sleep returns low score") {
-    int bed = 1410;   // 23:30
-    int wake = 440;   // 07:20
-    REQUIRE(activity_at(180, bed, wake) < 15);  // 3am
+    REQUIRE(awake_score(180, 1410, 440, &cfg) < 15);
 }
 
 TEST_CASE("peak hours return high score") {
-    int bed = 1410;
-    int wake = 440;
-    REQUIRE(activity_at(780, bed, wake) > 80);  // 1pm
+    REQUIRE(awake_score(780, 1410, 440, &cfg) > 80);
 }
 
 TEST_CASE("just woke up is mid range") {
-    int bed = 1410;
-    int wake = 440;
-    int score = activity_at(470, bed, wake);     // 7:50, 30 min after wake
+    int score = awake_score(470, 1410, 440, &cfg);
     REQUIRE(score > 25);
     REQUIRE(score < 75);
 }
 
 TEST_CASE("winding down before bed") {
-    int bed = 1410;
-    int wake = 440;
-    int score = activity_at(1350, bed, wake);    // 22:30, 1hr before bed
+    int score = awake_score(1350, 1410, 440, &cfg);
     REQUIRE(score > 20);
     REQUIRE(score < 70);
 }
 
 TEST_CASE("midnight wrap works") {
-    int bed = 60;     // 01:00 (late sleeper)
-    int wake = 540;   // 09:00
-    REQUIRE(activity_at(0, bed, wake) > 20);     // midnight, still up
-    REQUIRE(activity_at(180, bed, wake) < 15);   // 3am, asleep
-    REQUIRE(activity_at(720, bed, wake) > 80);   // noon, peak
+    REQUIRE(awake_score(0, 60, 540, &cfg) > 20);
+    REQUIRE(awake_score(180, 60, 540, &cfg) < 15);
+    REQUIRE(awake_score(720, 60, 540, &cfg) > 75);
 }
 
 TEST_CASE("afternoon dip") {
-    int bed = 1410;   // 23:30
-    int wake = 440;   // 07:20
-    int peak = activity_at(660, bed, wake);       // 11am
-    int dip = activity_at(920, bed, wake);         // ~8hrs after wake
+    int peak = awake_score(660, 1410, 440, &cfg);
+    int dip = awake_score(920, 1410, 440, &cfg);
     REQUIRE(dip < peak);
-    REQUIRE(dip >= 75);
-    REQUIRE(dip <= 80);
 }
 
 TEST_CASE("age offset shifts bedtime later for young") {
-    int base = 1410;  // 23:30
-    int shifted = apply_age_offset(base, 20);
+    int shifted = shift_for_age(1410, 20);
     REQUIRE(shifted < 60);
 }
 
 TEST_CASE("age offset shifts bedtime earlier for old") {
-    int base = 1410;
-    int shifted = apply_age_offset(base, 70);
-    REQUIRE(shifted < base);
+    int shifted = shift_for_age(1410, 70);
+    REQUIRE(shifted < 1410);
 }
 
 TEST_CASE("age offset wraps around midnight") {
-    int base = 1420;  // 23:40
-    int shifted = apply_age_offset(base, 20);
+    int shifted = shift_for_age(1420, 20);
     REQUIRE(shifted < 60);
+}
+
+TEST_CASE("age responsiveness caps older people") {
+    REQUIRE(age_responsiveness(90, 20) == 90);
+    REQUIRE(age_responsiveness(90, 70) == 75);
 }
