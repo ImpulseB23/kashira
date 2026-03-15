@@ -1,0 +1,9 @@
+[
+  { "min": 13, "max": 17, "bedtime_offset": 30, "waketime_offset": 45 },
+  { "min": 18, "max": 24, "bedtime_offset": 50, "waketime_offset": 55 },
+  { "min": 25, "max": 34, "bedtime_offset": 20, "waketime_offset": 15 },
+  { "min": 35, "max": 44, "bedtime_offset": 0, "waketime_offset": 0 },
+  { "min": 45, "max": 54, "bedtime_offset": -15, "waketime_offset": -15 },
+  { "min": 55, "max": 64, "bedtime_offset": -30, "waketime_offset": -40 },
+  { "min": 65, "max": 100, "bedtime_offset": -60, "waketime_offset": -55 }
+]

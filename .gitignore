@@ -1,0 +1,26 @@
+node_modules/
+dist/
+target/
+build/
+
+*.exe
+*.dll
+*.so
+*.dylib
+*.o
+*.obj
+*.a
+*.lib
+*.pdb
+
+.vscode/
+*.swp
+.DS_Store
+Thumbs.db
+desktop.ini
+
+.env
+.env.*
+
+# tauri generated schemas get regenerated on build
+src-tauri/gen/

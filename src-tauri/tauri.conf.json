@@ -1,0 +1,22 @@
+{
+  "productName": "Hilt",
+  "version": "0.1.0",
+  "identifier": "com.frostcrypt.hilt",
+  "build": {
+    "frontendDist": "../dist",
+    "devUrl": "http://localhost:5173",
+    "beforeDevCommand": "bun run dev",
+    "beforeBuildCommand": "bun run build"
+  },
+  "app": {
+    "windows": [
+      {
+        "title": "Hilt",
+        "width": 400,
+        "height": 600,
+        "resizable": true,
+        "decorations": false
+      }
+    ]
+  }
+}

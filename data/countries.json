@@ -1,0 +1,415 @@
+[
+  {
+    "code": "US",
+    "name": "United States",
+    "timezones": ["America/New_York", "America/Chicago", "America/Denver", "America/Los_Angeles", "America/Anchorage", "Pacific/Honolulu"],
+    "bedtime": "23:07",
+    "waketime": "07:20"
+  },
+  {
+    "code": "GB",
+    "name": "United Kingdom",
+    "timezones": ["Europe/London"],
+    "bedtime": "23:27",
+    "waketime": "07:33"
+  },
+  {
+    "code": "CA",
+    "name": "Canada",
+    "timezones": ["America/St_Johns", "America/Halifax", "America/Toronto", "America/Winnipeg", "America/Edmonton", "America/Vancouver"],
+    "bedtime": "23:20",
+    "waketime": "07:33"
+  },
+  {
+    "code": "AU",
+    "name": "Australia",
+    "timezones": ["Australia/Perth", "Australia/Adelaide", "Australia/Sydney"],
+    "bedtime": "22:52",
+    "waketime": "07:13"
+  },
+  {
+    "code": "NZ",
+    "name": "New Zealand",
+    "timezones": ["Pacific/Auckland"],
+    "bedtime": "22:52",
+    "waketime": "07:11"
+  },
+  {
+    "code": "JP",
+    "name": "Japan",
+    "timezones": ["Asia/Tokyo"],
+    "bedtime": "00:27",
+    "waketime": "07:09"
+  },
+  {
+    "code": "KR",
+    "name": "South Korea",
+    "timezones": ["Asia/Seoul"],
+    "bedtime": "00:05",
+    "waketime": "07:38"
+  },
+  {
+    "code": "CN",
+    "name": "China",
+    "timezones": ["Asia/Shanghai"],
+    "bedtime": "00:32",
+    "waketime": "07:42"
+  },
+  {
+    "code": "IN",
+    "name": "India",
+    "timezones": ["Asia/Kolkata"],
+    "bedtime": "00:12",
+    "waketime": "07:36"
+  },
+  {
+    "code": "DE",
+    "name": "Germany",
+    "timezones": ["Europe/Berlin"],
+    "bedtime": "23:31",
+    "waketime": "07:25"
+  },
+  {
+    "code": "FR",
+    "name": "France",
+    "timezones": ["Europe/Paris"],
+    "bedtime": "23:48",
+    "waketime": "07:51"
+  },
+  {
+    "code": "ES",
+    "name": "Spain",
+    "timezones": ["Europe/Madrid", "Atlantic/Canary"],
+    "bedtime": "23:59",
+    "waketime": "08:05"
+  },
+  {
+    "code": "IT",
+    "name": "Italy",
+    "timezones": ["Europe/Rome"],
+    "bedtime": "23:50",
+    "waketime": "07:52"
+  },
+  {
+    "code": "PT",
+    "name": "Portugal",
+    "timezones": ["Europe/Lisbon", "Atlantic/Azores"],
+    "bedtime": "00:01",
+    "waketime": "08:22"
+  },
+  {
+    "code": "NL",
+    "name": "Netherlands",
+    "timezones": ["Europe/Amsterdam"],
+    "bedtime": "23:34",
+    "waketime": "07:47"
+  },
+  {
+    "code": "BE",
+    "name": "Belgium",
+    "timezones": ["Europe/Brussels"],
+    "bedtime": "23:37",
+    "waketime": "07:40"
+  },
+  {
+    "code": "SE",
+    "name": "Sweden",
+    "timezones": ["Europe/Stockholm"],
+    "bedtime": "23:25",
+    "waketime": "07:21"
+  },
+  {
+    "code": "NO",
+    "name": "Norway",
+    "timezones": ["Europe/Oslo"],
+    "bedtime": "23:49",
+    "waketime": "07:43"
+  },
+  {
+    "code": "DK",
+    "name": "Denmark",
+    "timezones": ["Europe/Copenhagen"],
+    "bedtime": "23:22",
+    "waketime": "07:19"
+  },
+  {
+    "code": "FI",
+    "name": "Finland",
+    "timezones": ["Europe/Helsinki"],
+    "bedtime": "23:32",
+    "waketime": "07:44"
+  },
+  {
+    "code": "IE",
+    "name": "Ireland",
+    "timezones": ["Europe/Dublin"],
+    "bedtime": "23:39",
+    "waketime": "07:50"
+  },
+  {
+    "code": "CH",
+    "name": "Switzerland",
+    "timezones": ["Europe/Zurich"],
+    "bedtime": "23:29",
+    "waketime": "07:13"
+  },
+  {
+    "code": "AT",
+    "name": "Austria",
+    "timezones": ["Europe/Vienna"],
+    "bedtime": "23:24",
+    "waketime": "07:20"
+  },
+  {
+    "code": "PL",
+    "name": "Poland",
+    "timezones": ["Europe/Warsaw"],
+    "bedtime": "23:45",
+    "waketime": "07:25"
+  },
+  {
+    "code": "CZ",
+    "name": "Czechia",
+    "timezones": ["Europe/Prague"],
+    "bedtime": "23:29",
+    "waketime": "07:15"
+  },
+  {
+    "code": "SK",
+    "name": "Slovakia",
+    "timezones": ["Europe/Bratislava"],
+    "bedtime": "23:20",
+    "waketime": "07:18"
+  },
+  {
+    "code": "HU",
+    "name": "Hungary",
+    "timezones": ["Europe/Budapest"],
+    "bedtime": "23:59",
+    "waketime": "07:22"
+  },
+  {
+    "code": "RO",
+    "name": "Romania",
+    "timezones": ["Europe/Bucharest"],
+    "bedtime": "00:05",
+    "waketime": "08:01"
+  },
+  {
+    "code": "GR",
+    "name": "Greece",
+    "timezones": ["Europe/Athens"],
+    "bedtime": "00:00",
+    "waketime": "08:25"
+  },
+  {
+    "code": "EE",
+    "name": "Estonia",
+    "timezones": ["Europe/Tallinn"],
+    "bedtime": "23:56",
+    "waketime": "07:37"
+  },
+  {
+    "code": "RU",
+    "name": "Russia",
+    "timezones": ["Europe/Kaliningrad", "Europe/Moscow", "Europe/Samara", "Asia/Yekaterinburg", "Asia/Omsk", "Asia/Krasnoyarsk", "Asia/Irkutsk", "Asia/Yakutsk", "Asia/Vladivostok", "Asia/Magadan", "Asia/Kamchatka"],
+    "bedtime": "00:33",
+    "waketime": "08:06"
+  },
+  {
+    "code": "TR",
+    "name": "Turkey",
+    "timezones": ["Europe/Istanbul"],
+    "bedtime": "00:00",
+    "waketime": "08:02"
+  },
+  {
+    "code": "IL",
+    "name": "Israel",
+    "timezones": ["Asia/Jerusalem"],
+    "bedtime": "23:50",
+    "waketime": "07:54"
+  },
+  {
+    "code": "AE",
+    "name": "United Arab Emirates",
+    "timezones": ["Asia/Dubai"],
+    "bedtime": "23:57",
+    "waketime": "07:43"
+  },
+  {
+    "code": "SA",
+    "name": "Saudi Arabia",
+    "timezones": ["Asia/Riyadh"],
+    "bedtime": "00:15",
+    "waketime": "08:27"
+  },
+  {
+    "code": "QA",
+    "name": "Qatar",
+    "timezones": ["Asia/Qatar"],
+    "bedtime": "00:00",
+    "waketime": "07:32"
+  },
+  {
+    "code": "KW",
+    "name": "Kuwait",
+    "timezones": ["Asia/Kuwait"],
+    "bedtime": "00:10",
+    "waketime": "08:01"
+  },
+  {
+    "code": "TH",
+    "name": "Thailand",
+    "timezones": ["Asia/Bangkok"],
+    "bedtime": "23:56",
+    "waketime": "07:24"
+  },
+  {
+    "code": "SG",
+    "name": "Singapore",
+    "timezones": ["Asia/Singapore"],
+    "bedtime": "00:12",
+    "waketime": "07:38"
+  },
+  {
+    "code": "MY",
+    "name": "Malaysia",
+    "timezones": ["Asia/Kuala_Lumpur"],
+    "bedtime": "00:05",
+    "waketime": "07:41"
+  },
+  {
+    "code": "PH",
+    "name": "Philippines",
+    "timezones": ["Asia/Manila"],
+    "bedtime": "23:50",
+    "waketime": "07:28"
+  },
+  {
+    "code": "ID",
+    "name": "Indonesia",
+    "timezones": ["Asia/Jakarta", "Asia/Makassar", "Asia/Jayapura"],
+    "bedtime": "23:30",
+    "waketime": "06:55"
+  },
+  {
+    "code": "TW",
+    "name": "Taiwan",
+    "timezones": ["Asia/Taipei"],
+    "bedtime": "00:37",
+    "waketime": "07:56"
+  },
+  {
+    "code": "HK",
+    "name": "Hong Kong",
+    "timezones": ["Asia/Hong_Kong"],
+    "bedtime": "00:11",
+    "waketime": "07:57"
+  },
+  {
+    "code": "BR",
+    "name": "Brazil",
+    "timezones": ["America/Sao_Paulo", "America/Manaus", "America/Bahia", "America/Recife"],
+    "bedtime": "23:45",
+    "waketime": "07:31"
+  },
+  {
+    "code": "MX",
+    "name": "Mexico",
+    "timezones": ["America/Mexico_City", "America/Cancun", "America/Chihuahua", "America/Tijuana"],
+    "bedtime": "23:36",
+    "waketime": "07:09"
+  },
+  {
+    "code": "CO",
+    "name": "Colombia",
+    "timezones": ["America/Bogota"],
+    "bedtime": "23:41",
+    "waketime": "06:31"
+  },
+  {
+    "code": "CR",
+    "name": "Costa Rica",
+    "timezones": ["America/Costa_Rica"],
+    "bedtime": "23:43",
+    "waketime": "06:38"
+  },
+  {
+    "code": "CL",
+    "name": "Chile",
+    "timezones": ["America/Santiago"],
+    "bedtime": "23:50",
+    "waketime": "07:40"
+  },
+  {
+    "code": "ZA",
+    "name": "South Africa",
+    "timezones": ["Africa/Johannesburg"],
+    "bedtime": "22:37",
+    "waketime": "06:24"
+  },
+  {
+    "code": "EG",
+    "name": "Egypt",
+    "timezones": ["Africa/Cairo"],
+    "bedtime": "00:00",
+    "waketime": "07:30"
+  },
+  {
+    "code": "NG",
+    "name": "Nigeria",
+    "timezones": ["Africa/Lagos"],
+    "bedtime": "23:30",
+    "waketime": "06:30"
+  },
+  {
+    "code": "KE",
+    "name": "Kenya",
+    "timezones": ["Africa/Nairobi"],
+    "bedtime": "23:15",
+    "waketime": "06:30"
+  },
+  {
+    "code": "UA",
+    "name": "Ukraine",
+    "timezones": ["Europe/Kyiv"],
+    "bedtime": "00:00",
+    "waketime": "07:51"
+  },
+  {
+    "code": "PK",
+    "name": "Pakistan",
+    "timezones": ["Asia/Karachi"],
+    "bedtime": "00:00",
+    "waketime": "07:15"
+  },
+  {
+    "code": "BD",
+    "name": "Bangladesh",
+    "timezones": ["Asia/Dhaka"],
+    "bedtime": "23:45",
+    "waketime": "07:00"
+  },
+  {
+    "code": "VN",
+    "name": "Vietnam",
+    "timezones": ["Asia/Ho_Chi_Minh"],
+    "bedtime": "23:30",
+    "waketime": "07:00"
+  },
+  {
+    "code": "AR",
+    "name": "Argentina",
+    "timezones": ["America/Argentina/Buenos_Aires"],
+    "bedtime": "00:00",
+    "waketime": "07:30"
+  },
+  {
+    "code": "PE",
+    "name": "Peru",
+    "timezones": ["America/Lima"],
+    "bedtime": "23:30",
+    "waketime": "06:45"
+  }
+]
