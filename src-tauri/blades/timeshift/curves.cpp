@@ -1,23 +1,41 @@
 #include "curves.h"
 
-int minutes_between(int from, int to) {
+int minutes_between(int from, int to)
+{
     int diff = to - from;
-    if (diff < 0) diff += 1440;
+    if (diff < 0)
+        diff += 1440;
     return diff;
 }
 
-int activity_at(int current_minutes, int bedtime, int waketime) {
+int activity_at(int current_minutes, int bedtime, int waketime)
+{
     int time_awake = minutes_between(waketime, current_minutes);
     int time_til_sleep = minutes_between(current_minutes, bedtime);
 
     bool awake;
-    if (waketime < bedtime) {
+    if (waketime < bedtime)
+    {
         awake = (current_minutes >= waketime && current_minutes < bedtime);
-    } else {
+    }
+    else
+    {
         awake = (current_minutes >= waketime || current_minutes < bedtime);
     }
 
-    if (!awake) return 5;
+    if (!awake)
+    {
+        int time_since_bed = minutes_between(bedtime, current_minutes);
+        int time_til_wake = minutes_between(current_minutes, waketime);
+
+        if (time_since_bed < 30)
+            return 20 - (time_since_bed * 15) / 30;
+
+        if (time_til_wake < 45)
+            return 10 + ((45 - time_til_wake) * 10) / 45;
+
+        return 5;
+    }
 
     if (time_awake < 60)
         return 30 + (time_awake * 40) / 60;
@@ -31,21 +49,13 @@ int activity_at(int current_minutes, int bedtime, int waketime) {
     if (time_til_sleep < 180)
         return 50 + ((time_til_sleep - 60) * 35) / 120;
 
+    if (time_awake > 420 && time_awake < 540)
+    {
+        int dist = time_awake - 480;
+        if (dist < 0)
+            dist = -dist;
+        return 75 + (dist * 15) / 60;
+    }
+
     return 90;
-}
-
-int apply_age_offset(int base_minutes, int age) {
-    int offset = 0;
-    if (age < 18) offset = 30;
-    else if (age < 25) offset = 50;
-    else if (age < 35) offset = 20;
-    else if (age < 45) offset = 0;
-    else if (age < 55) offset = -15;
-    else if (age < 65) offset = -30;
-    else offset = -60;
-
-    int result = base_minutes + offset;
-    if (result < 0) result += 1440;
-    if (result >= 1440) result -= 1440;
-    return result;
 }

@@ -11,6 +11,11 @@ hilt is a modular desktop app. rust/tauri core, svelte frontend, c++ for blade l
 - breaking changes to public interfaces
 - missing error handling at system boundaries
 
+## language boundaries
+- flag any business logic, calculations, or data processing in typescript/svelte — all logic belongs in c++, rust, c, or go
+- svelte is UI only: rendering and calling tauri commands
+- c++ handles blade logic, rust handles security-sensitive ops and FFI
+
 ## architecture notes
 - `src/` svelte frontend
 - `src-tauri/src/` rust backend

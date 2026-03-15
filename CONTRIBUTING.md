@@ -35,6 +35,16 @@ cmake --build build
 - if you're adding new c++ logic, add tests for it
 - match the existing code style
 
+## language rules
+
+all logic lives outside the frontend. the frontend (svelte/typescript) is strictly for UI rendering and calling backend commands. no business logic, no calculations, no data processing in typescript.
+
+- **c++** — blade logic, scoring algorithms, data processing
+- **rust** — app shell, FFI bridge, file I/O, anything security-sensitive
+- **c** — low-level utilities, OS-level operations, shared glue code
+- **go** — network-related features (background daemons, connectivity)
+- **typescript/svelte** — UI only. display data, handle user input, call tauri commands
+
 ## blades
 
 each blade is a self-contained feature module. if you want to add a new blade, look at how `timeshift` is structured and follow the same pattern.

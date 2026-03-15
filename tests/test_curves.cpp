@@ -1,5 +1,6 @@
 #include <catch2/catch_test_macros.hpp>
 #include "curves.h"
+#include "adjustments.h"
 
 TEST_CASE("deep sleep returns low score") {
     int bed = 1410;   // 23:30
@@ -35,6 +36,16 @@ TEST_CASE("midnight wrap works") {
     REQUIRE(activity_at(0, bed, wake) > 20);     // midnight, still up
     REQUIRE(activity_at(180, bed, wake) < 15);   // 3am, asleep
     REQUIRE(activity_at(720, bed, wake) > 80);   // noon, peak
+}
+
+TEST_CASE("afternoon dip") {
+    int bed = 1410;   // 23:30
+    int wake = 440;   // 07:20
+    int peak = activity_at(660, bed, wake);       // 11am
+    int dip = activity_at(920, bed, wake);         // ~8hrs after wake
+    REQUIRE(dip < peak);
+    REQUIRE(dip >= 75);
+    REQUIRE(dip <= 80);
 }
 
 TEST_CASE("age offset shifts bedtime later for young") {

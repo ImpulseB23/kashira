@@ -3,11 +3,19 @@ project(hilt-tests)
 
 set(CMAKE_CXX_STANDARD 17)
 
-add_subdirectory(catch2)
+include(FetchContent)
+FetchContent_Declare(
+    Catch2
+    GIT_REPOSITORY https://github.com/catchorg/Catch2.git
+    GIT_TAG v3.8.0
+    GIT_SHALLOW TRUE
+)
+FetchContent_MakeAvailable(Catch2)
 
 add_executable(tests
     test_curves.cpp
     ../src-tauri/blades/timeshift/curves.cpp
+    ../src-tauri/blades/timeshift/adjustments.cpp
 )
 
 target_include_directories(tests PRIVATE ../src-tauri/blades/timeshift)
