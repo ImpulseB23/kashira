@@ -23,10 +23,14 @@ jobs:
       - name: install ninja
         uses: seanmiddleditch/gha-setup-ninja@v5
 
+      - name: set macos sdk
+        if: runner.os == 'macOS'
+        run: echo "SDKROOT=$(xcrun --sdk macosx --show-sdk-path)" >> $GITHUB_ENV
+
       - name: build and run tests
         run: |
           cd tests
-          cmake -B build -G Ninja -DCMAKE_OSX_DEPLOYMENT_TARGET=15.0
+          cmake -B build -G Ninja
           cmake --build build
           ctest --test-dir build --output-on-failure
 
