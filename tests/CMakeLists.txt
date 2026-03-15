@@ -3,10 +3,6 @@ project(kashira-tests)
 
 set(CMAKE_CXX_STANDARD 17)
 
-if(APPLE)
-    set(CMAKE_OSX_DEPLOYMENT_TARGET "15.0")
-endif()
-
 include(FetchContent)
 FetchContent_Declare(
     Catch2
