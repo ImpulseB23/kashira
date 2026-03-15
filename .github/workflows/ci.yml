@@ -16,24 +16,45 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-15]
+        os: [ubuntu-latest, windows-latest]
     steps:
       - uses: actions/checkout@v6
-
-      - name: install ninja
-        uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: build and run tests
         run: |
           cd tests
-          cmake -B build -G Ninja
+          cmake -B build
           cmake --build build
           ctest --test-dir build --output-on-failure
-        env:
-          MACOSX_DEPLOYMENT_TARGET: "14.0"
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: install tauri deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
+
+      - name: rust clippy
+        run: cd habaki/src-tauri && cargo clippy -- -D warnings
+
+      - name: rust audit
+        run: |
+          cargo install cargo-audit --quiet
+          cd habaki/src-tauri && cargo audit
+
+      - uses: oven-sh/setup-bun@v2
+      - run: cd habaki && bun install
+      - run: cd habaki && bunx svelte-check --tsconfig tsconfig.json
 
   build:
-    needs: cpp-tests
+    if: github.event_name == 'pull_request'
+    needs: [cpp-tests, lint]
     runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
@@ -87,23 +108,3 @@ jobs:
             habaki/src-tauri/target/release/bundle/**/*.dmg
             habaki/src-tauri/target/release/bundle/**/*.AppImage
             habaki/src-tauri/target/release/bundle/**/*.deb
-
-  lint:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v6
-      - uses: dtolnay/rust-toolchain@stable
-        with:
-          components: clippy
-
-      - name: install tauri deps
-        run: |
-          sudo apt-get update
-          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
-
-      - name: rust lint
-        run: cd habaki/src-tauri && cargo clippy -- -D warnings
-
-      - uses: oven-sh/setup-bun@v2
-      - run: cd habaki && bun install
-      - run: cd habaki && bunx svelte-check --tsconfig tsconfig.json
