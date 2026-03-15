@@ -6,23 +6,27 @@ on:
   pull_request:
     branches: [main]
 
+concurrency:
+  group: ci-${{ github.ref }}
+  cancel-in-progress: true
+
 jobs:
   cpp-tests:
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-15]
     steps:
       - uses: actions/checkout@v6
 
-      - name: select xcode
-        if: runner.os == 'macOS'
-        run: sudo xcode-select -s /Applications/Xcode.app
+      - name: install ninja
+        uses: seanmiddleditch/gha-setup-ninja@v5
 
       - name: build and run tests
         run: |
           cd tests
-          cmake -B build
+          cmake -B build -G Ninja
           cmake --build build
           ctest --test-dir build --output-on-failure
 
@@ -30,8 +34,9 @@ jobs:
     needs: cpp-tests
     runs-on: ${{ matrix.os }}
     strategy:
+      fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-latest]
+        os: [ubuntu-latest, windows-latest, macos-15]
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
@@ -63,6 +68,9 @@ jobs:
       - name: install frontend deps
         run: cd habaki && bun install
 
+      - name: build frontend
+        run: cd habaki && bun run build
+
       - name: build app
         run: cd habaki && cargo tauri build
         env:
@@ -77,3 +85,18 @@ jobs:
             habaki/src-tauri/target/release/bundle/**/*.dmg
             habaki/src-tauri/target/release/bundle/**/*.AppImage
             habaki/src-tauri/target/release/bundle/**/*.deb
+
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v6
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          components: clippy
+
+      - name: rust lint
+        run: cd habaki/src-tauri && cargo clippy -- -D warnings
+
+      - uses: oven-sh/setup-bun@v2
+      - run: cd habaki && bun install
+      - run: cd habaki && bunx svelte-check --tsconfig tsconfig.json
