@@ -23,7 +23,7 @@ jobs:
       - name: build and run tests
         run: |
           cd tests
-          cmake -B build -G Ninja
+          cmake -B build
           cmake --build build
           ctest --test-dir build --output-on-failure
 
@@ -33,7 +33,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        os: [ubuntu-latest, windows-latest, macos-15]
+        os: [ubuntu-latest, windows-latest, macos-14]
     steps:
       - uses: actions/checkout@v6
       - uses: dtolnay/rust-toolchain@stable
@@ -90,6 +90,11 @@ jobs:
       - uses: dtolnay/rust-toolchain@stable
         with:
           components: clippy
+
+      - name: install tauri deps
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y libwebkit2gtk-4.1-dev libappindicator3-dev librsvg2-dev
 
       - name: rust lint
         run: cd habaki/src-tauri && cargo clippy -- -D warnings
